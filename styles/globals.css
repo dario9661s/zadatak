@@ -5,12 +5,138 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
-
+.errorMsg {
+  color: salmon;
+  position: absolute;
+  font-size: 0.7em;
+}
 a {
   color: inherit;
   text-decoration: none;
 }
-
+.PostContainer {
+  margin-top: 100px;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+.media{
+  width: 40%;
+  height: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center;
+  
+}
+.description {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center;
+  
+}
 * {
   box-sizing: border-box;
+}
+header a {
+  margin: 0 20px;
+}
+header a:hover {
+  color: white;
+}
+
+.formContainer {
+  height: 500px;
+}
+header {
+  background-color: #4183c4 !important;
+}
+.createNew {
+  width: 49%;
+  height: 150px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.Links {
+  width: 100%;
+  justify-content: center;
+  display: flex;
+}
+.Links a {
+  color: white;
+  font-size: 20px;
+}
+header a {
+  color: white;
+  text-decoration: none;
+}
+body {
+  margin: 0;
+}
+footer p {
+  margin: 0 20px;
+}
+.ui.cards{
+  
+  padding: 10%;
+}
+.mediaSelector {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+
+}
+.mediaImg {
+  width: 640px;
+  height: 360px;
+}
+.mediaSelector img {
+  width: 100px;
+  height: 100px;
+}
+.CardContainer {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.Card {
+  cursor: pointer;
+  transition: all ease 0.2s;
+  width: 50%;
+  margin: 30px;
+  display: flex;
+  justify-content: center;
+  border: 2px solid #4183c4;
+  padding: 25px;
+  border-radius: 15px;
+}
+.Card:hover {
+  transform: scale(1.05);
+}
+.CardDescription {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.ValidationContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ValidationContainer h1 {
+ color: white;
+}
+.ValidationContainer .formContainer {
+  width: 60%;
 }
