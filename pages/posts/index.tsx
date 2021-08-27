@@ -1,39 +1,33 @@
-import { Grid } from "@material-ui/core"
-import axios from "axios"
-import { useRouter } from "next/router"
-import React, { useEffect, useState } from "react"
-import { Button, Form } from "semantic-ui-react"
-import Card from "../../components/UI/Card"
-import Link from "next/link"
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Button, Form } from "semantic-ui-react";
+import Card from "../../components/UI/Card";
+import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { setPosts } from "../../store/actions/postsAction";
+import { useSelector } from "react-redux";
+
 function Projects() {
-  const [projects, setProjects] = useState([])
-
-  const router = useRouter()
-  // ibiytest
-  //ibiy2021
-  console.log();
-  
+  const dispatch = useDispatch();
+  const postState = useSelector((state) => state.post.posts);
   useEffect(() => {
-    axios
-      .get(`/api/project`)
-      .then((res) => {
-        setProjects(res.data.result)
-        console.log(res.data.result);
-        
-      })
-  }, [])
+    axios.get(`/api/project`).then((res) => {
+      dispatch(setPosts(res.data.result));
+    });
+  }, []);
 
- 
   return (
-   <div className="CardContainer">
-     <div className="createNew">
-       <Button basic><Link href="/create-post">Create New</Link></Button>
-     </div>
-      {projects &&  projects.map((project:any)=> {
-        return <Card project= {project} />
+    <div className="CardContainer">
+      <div className="createNew">
+        <Button basic>
+          <Link href="/create-post">Create New</Link>
+        </Button>
+      </div>
+      {postState.map((project: any) => {
+        return <Card project={project} />;
       })}
-   </div>
-  )
+    </div>
+  );
 }
 
-export default Projects
+export default Projects;

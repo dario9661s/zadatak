@@ -39,7 +39,8 @@ function CreatePost(props: any) {
         }&goal=${values.goal.toString()}`
       )
       .then((res) => {
-        router.reload(window.location.pathname)
+        // router.reload(window.location.pathname)
+        router.reload()
         console.log(res)
       });
     } else {
