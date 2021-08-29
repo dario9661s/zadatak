@@ -6,7 +6,6 @@ import "semantic-ui-css/semantic.min.css";
 import { Provider } from "react-redux";
 import { createWrapper } from "next-redux-wrapper";
 import store from "../store/store";
-import { CookiesProvider } from "react-cookie";
 
 type Props = {
   pageProps: Object;
@@ -19,10 +18,8 @@ const MyApp: React.FC<Props> = (props) => {
 
   return (
     <Provider store={store}>
-      <CookiesProvider>
         <Nav />
         <Component {...pageProps} />
-      </CookiesProvider>
     </Provider>
   );
 };
