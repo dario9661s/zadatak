@@ -7,7 +7,7 @@ import ValidationForm from "../../components/ValidationForm";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
-import { useSelector } from "react-redux";
+import { Loader } from "semantic-ui-react";
 
 function Post() {
   const [project, setProject] = useState<
@@ -21,16 +21,9 @@ function Post() {
       }
   >();
   const [media, setMedia] = useState("image");
-  const router = useRouter();
   const [open, setOpen] = React.useState(false);
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const postId = router.query.postId;
-
-  console.log(postId);
+  const router = useRouter();
+  const postId :string | string[] | undefined  = router.query.postId;
 
   useEffect(() => {
     axios.get(`/api/project`).then((res) => {
@@ -39,89 +32,79 @@ function Post() {
           setProject(res);
         }
       });
-      console.log(res.data.result);
     });
-  }, []);
+  }, [postId]);
 
-  const deleteHandler = () => {
-    axios.get(`/api/delete?id=${postId}`).then((res) => {
-      console.log(res);
+  if (!router.isReady) {
+    return <Loader size="large"></Loader>;
+  } else {
+    const handleClose = () => {
+      setOpen(false);
+    };
 
-      if (res.data.success === true) {
-        router.push("/posts");
-      }
-    });
-  };
+    const deleteHandler = () => {
+      axios.get(`/api/delete?id=${postId}`).then((res) => {
+        if (res.data.success === true) {
+          router.push("/posts");
+        }
+      });
+    };
 
-  return (
-    <div className="PostContainer">
-      {open ? (
-        <Modal
-          aria-labelledby="transition-modal-title"
-          aria-describedby="transition-modal-description"
-          className="ValidationContainer"
-          open={open}
-          onClose={handleClose}
-          closeAfterTransition
-          BackdropComponent={Backdrop}
-          BackdropProps={{
-            timeout: 500,
-          }}
-        >
-          <Fade in={open}>
-            <ValidationForm update={postId} />
-          </Fade>
-        </Modal>
-      ) : null}
-      <div className="media">
-        {media === "image" ? (
-          <img className="mediaImg" src={project && project.image} />
-        ) : (
-          <ReactPlayer url={project && project.video} />
-        )}
-        <div className="mediaSelector">
-          <img
-            onClick={() => setMedia("image")}
-            src={project && project.image}
-          />
-          <video
-            height="100px"
-            width="100px"
-            onClick={() => setMedia("video")}
-            src={project && project.video}
-          />
+    return (
+      <div className="PostContainer">
+        {open ? (
+          <Modal
+            aria-labelledby="transition-modal-title"
+            aria-describedby="transition-modal-description"
+            className="ValidationContainer"
+            open={open}
+            onClose={handleClose}
+            closeAfterTransition
+            BackdropComponent={Backdrop}
+            BackdropProps={{
+              timeout: 500,
+            }}
+          >
+            <Fade in={open}>
+              <ValidationForm update={postId} />
+            </Fade>
+          </Modal>
+        ) : null}
+        <div className="media">
+          {media === "image" ? (
+            <img className="mediaImg" src={project && project.image} />
+          ) : (
+            <ReactPlayer width={"100%"} height={300} url={project && project.video} />
+          )}
+          <div className="mediaSelector">
+            <img
+              onClick={() => setMedia("image")}
+              src={project && project.image}
+            />
+            <img
+              height="100px"
+              width="100px"
+              onClick={() => setMedia("video")}
+              src={"/play.png"}
+            />
+          </div>
+        </div>
+        <div className="description">
+          <h1> {project && project.title} </h1>
+          <p>{project && project.description}</p>
+          <h3> Goal: {project && project.goal}.00 </h3>
+          <div style={{ display: "flex" }}>
+            <Button onClick={() => deleteHandler()} color="red">
+              Delete
+            </Button>
+            <Button onClick={() => setOpen(!open)} secondary>
+              Update
+            </Button>
+          </div>
         </div>
       </div>
-      <div className="description">
-        <h1> {project && project.title} </h1>
-        <p>{project && project.description}</p>
-        <h3> {project && project.goal}.00 </h3>
-        <div style={{ display: "flex" }}>
-          <Button onClick={() => deleteHandler()} color="red">
-            Delete
-          </Button>
-          <Button onClick={() => setOpen(!open)} secondary>
-            Update
-          </Button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-
-// This also gets called at build time
-export async function getStaticProps({ params }) {
-  // params contains the post `id`.
-  // If the route is like /posts/1, then params.id is 1
-  let a ={}
-  axios.get(`/api/project`).then((res) => {
-    a = res
-  })
-
-
-  // Pass post data to the page via props
-  return { props: { a } }
+    );
+  }
 }
 
 export default Post;

@@ -12,12 +12,7 @@ type Data = {
 export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
-) {       
-
-    
-    console.log(req.cookies.auth);
-
-            
+) {            
     axios
     .get("http://3.123.253.119:1212/project", {
       headers: {
@@ -26,8 +21,6 @@ export default function handler(
     })
     .then((response) => {
       res.send(response.data)
-      let token = response.data.result
-    //   console.log(token)
     })
     .catch((err) => {
       console.log(err)

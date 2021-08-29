@@ -4,7 +4,7 @@ import {useField, ErrorMessage} from "formik"
 import React, { useState } from "react"
 
 
-function Input({...props}) {
+function Input({...props}: any) {
     const [field, meta] = useField(props)
 
     

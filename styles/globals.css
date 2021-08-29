@@ -15,15 +15,19 @@ a {
   text-decoration: none;
 }
 .PostContainer {
+  flex-wrap: wrap;
   margin-top: 100px;
   height: 500px;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
-  
+}
+.Card img {
+  width: 300px;
+  height: 300px;
 }
 .media{
-  width: 40%;
+  width: 500px;
   height: 100%;
   display: flex;
   justify-content: space-evenly;
@@ -32,7 +36,8 @@ a {
   
 }
 .description {
-  width: 40%;
+  padding: 20px;
+  width: 500px;
   height: 100%;
   display: flex;
   justify-content: space-evenly;
@@ -62,6 +67,18 @@ header {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+}
+.newPost {
+
+  height: 47px;
+    position: absolute;
+    display: flex;
+    color: white;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(68 113 86 / 40%);
+
 }
 .Links {
   width: 100%;
@@ -94,8 +111,8 @@ footer p {
 
 }
 .mediaImg {
-  width: 640px;
-  height: 360px;
+  width: 500px;
+  height: 300px;
 }
 .mediaSelector img {
   width: 100px;
@@ -124,6 +141,7 @@ footer p {
   transform: scale(1.05);
 }
 .CardDescription {
+  padding: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -140,3 +158,34 @@ footer p {
 .ValidationContainer .formContainer {
   width: 60%;
 }
+.LoaderContainer {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+@media(max-width:500px) {
+  .media img {
+    width: 100%;
+  }
+
+}
+@media(max-width:1300px) {
+  .Card{
+    width: 80%;
+  }
+}
+@media(max-width:800px) {
+  .Card img {
+    width: 100%;
+  }
+  .Card {
+    flex-direction: column;
+  }
+  .CardDescription {
+    width: 100%;
+    padding: 20px;
+  }
+}
+
+

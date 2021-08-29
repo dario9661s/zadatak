@@ -11,6 +11,7 @@ import MoreIcon from "@material-ui/icons/MoreVert"
 import Link from "next/link"
 import React from "react"
 
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     grow: {
@@ -120,7 +121,7 @@ export default function PrimarySearchAppBar() {
       </MenuItem>
     </Menu>
   )
-
+    
   return (
     <div className={classes.grow}>
       <AppBar position="static">
@@ -137,8 +138,8 @@ export default function PrimarySearchAppBar() {
             <Link href="/">Material-UI</Link>
           </Typography>
           <Typography className={classes.title} variant="h6" noWrap>
-            <Link href="/posts">Posts</Link>
-          </Typography>
+            <Link href="/posts">Projects</Link>
+          </Typography> 
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton

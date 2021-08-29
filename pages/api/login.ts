@@ -9,14 +9,10 @@ import cookie from 'cookie';
 type Data = {
   name: string
 }
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-
-
-  
   axios
         .post("http://3.123.253.119:1212/login", {
           username: req.query.username,
@@ -36,6 +32,6 @@ export default async function handler(
           res.end();
         })
         .catch((err) => {
-          console.log(err)
+          res.send(err)
         })
 }

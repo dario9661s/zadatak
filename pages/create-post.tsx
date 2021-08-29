@@ -11,7 +11,7 @@ function CreatePost() {
       justifyContent="center"
       alignItems="center"
     > 
-      <ValidationForm/>
+      <ValidationForm update= {"NoUpdate"} />
     </Grid>
   );
 }
